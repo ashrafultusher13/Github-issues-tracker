@@ -41,7 +41,7 @@
         <h1 class="font-semibold text-2xl">GitHub Issues Tracker</h1>
       </div>
 
-      <div class="nav-r flex gap-2">
+      <div class="nav-r flex flex-col lg:flex-row gap-2">
         <!-- search -->
         <label class="input">
           <svg
@@ -70,7 +70,7 @@
     </header>
     <main class="my-14 w-10/12 mx-auto">
       <!-- Main Heading with buttons -->
-      <div class="bg-red-200 p-6 rounded-lg mb-4 shadow">
+      <div class="bg-red-200 p-6 rounded-lg mb-4 shadow flex flex-col lg:flex-row gap-2">
         <button class="px-12 btn btn-primary">All</button>
         <button class="px-12 btn">Open</button>
         <button class="px-12 btn">Closed</button>
@@ -100,7 +100,7 @@
       <!-- Main Container Section -->
       <section class="shadow ">
         <!-- cards container -->
-        <div class="grid grid-cols-4 gap-5 p-6 rounded-b-lg bg-purple-200 ">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 rounded-b-lg bg-purple-200 ">
           <!-- Card -->
           <div class="bg-orange-200 rounded-lg shadow">
             <!-- Card up -->
