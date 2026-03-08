@@ -73,9 +73,23 @@
       <div
         class="bg-red-200 p-6 rounded-lg mb-4 shadow flex flex-col lg:flex-row gap-2"
       >
-        <button onclick="btnActive('all-btn')" id="all-btn" class="px-12 btn btn-primary">All</button>
-        <button onclick="btnActive('open-btn')" id="open-btn" class="px-12 btn">Open</button>
-        <button onclick="btnActive('closed-btn')" id="closed-btn" class="px-12 btn">Closed</button>
+        <button
+          onclick="btnActive('all-btn')"
+          id="all-btn"
+          class="px-12 btn btn-primary"
+        >
+          All
+        </button>
+        <button onclick="btnActive('open-btn')" id="open-btn" class="px-12 btn">
+          Open
+        </button>
+        <button
+          onclick="btnActive('closed-btn')"
+          id="closed-btn"
+          class="px-12 btn"
+        >
+          Closed
+        </button>
       </div>
       <!-- Main Middle Issues -->
       <div
@@ -108,15 +122,28 @@
         <!-- cards container -->
         <div
           id="cards-container"
-          class="grid items-baseline grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 rounded-b-lg bg-purple-200"
+          class="grid items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-6 rounded-b-lg bg-purple-200"
         >
           <!-- Card -->
-        
-          
-
         </div>
       </section>
     </main>
+
+    <!-- Modal -->
+    <dialog id="issue-modal" class="modal modal-bottom sm:modal-middle">
+      <div class="modal-box">
+        <div id="details-container"  class="space-y-3"">
+
+        </div>
+
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-primary">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <script src="./script/home.js"></script>
   </body>

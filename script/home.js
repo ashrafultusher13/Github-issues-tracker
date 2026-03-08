@@ -14,6 +14,57 @@ const loadIssueCard = () => {
     });
 };
 
+const loadIssueDetails = (id) => {
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((object) => showDetails(object.data));
+};
+
+
+
+const showDetails = (issue) => {
+  const detailsBox = document.getElementById("details-container");
+  detailsBox.innerHTML = `
+  <h3 class="text-lg font-bold">${issue.title}</h3>
+        <div class="flex gap-7 items-center">
+          <p
+            class="${issue.status === "open" ? "bg-green-600" : "bg-purple-600"} rounded-full p-2 text-white font-medium text-[12px]"
+          >
+            ${issue.status}
+          </p>
+
+          <ul class="flex gap-7 list-disc text-sm">
+            <li>Opened by Fahim Ahmed</li>
+            <li>${issue.createdAt}</li>
+          </ul>
+        </div>
+
+        <div class="flex gap-2">
+          <span class="bg-yellow-400">${issue.labels[0]}</span>
+          <span class="bg-yellow-400">${issue.labels[1] ? issue.labels[1] : ""}</span>
+        </div>
+
+        <p>
+          ${issue.description}
+        </p>
+
+        <div
+          class="bg-gray-200 flex justify-between items-center p-4 rounded-md"
+        >
+          <div>
+            <p>Assignee:</p>
+            <p>${issue.assignee}</p>
+          </div>
+          <div>
+            <p>Priority:</p>
+            <p>${issue.priority}</p>
+          </div>
+        </div>
+  `;
+  document.getElementById("issue-modal").showModal();
+};
+
 const btnActive = (id) => {
   allBtn.classList.remove("btn-primary");
   openBtn.classList.remove("btn-primary");
@@ -54,12 +105,12 @@ const showAllIssueCard = (issues) => {
     const card = document.createElement("div");
 
     card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
+          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
@@ -76,16 +127,16 @@ const showAllIssueCard = (issues) => {
             </div>
             <hr class="text-gray-400" />
             <!-- Card down -->
-            <div class="p-4 flex justify-between">
+            <div class="p-4 flex justify-between gap-4">
               <div class="down-left">
-                <p class="text-gray-400">
+                <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
               </div>
-              <div class="down-right flex flex-col items-end">
-                <p class="text-gray-400">${issue.createdAt}</p>
-                <p class="text-gray-400">Updated:${issue.updatedAt}</p>
+              <div class="down-right flex flex-col items-start">
+                <p class="text-gray-400 text-sm">${issue.createdAt}</p>
+                <p class="text-gray-400 text-sm">Updated:${issue.updatedAt}</p>
               </div>
             </div>
           </div>
@@ -93,6 +144,10 @@ const showAllIssueCard = (issues) => {
     `;
 
     cardsContainer.appendChild(card);
+    card.addEventListener("click", () => {
+      const cardId = issue.id;
+      loadIssueDetails(cardId);
+    });
   });
 };
 
@@ -203,18 +258,5 @@ const showClosedCard = (issues) => {
 
 loadIssueCard();
 
-// {
-// "id": 1,
-// "title": "Fix navigation menu on mobile devices",
-// "description": "The navigation menu doesn't collapse properly on mobile devices. Need to fix the responsive behavior.",
-// "status": "open",
-// "labels": [
-// "bug",
-// "help wanted"
-// ],
-// "priority": "high",
-// "author": "john_doe",
-// "assignee": "jane_smith",
-// "createdAt": "2024-01-15T10:30:00Z",
-// "updatedAt": "2024-01-15T10:30:00Z"
-// },
+
+
