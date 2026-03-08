@@ -52,13 +52,14 @@ const showAllIssueCard = (issues) => {
 
   issues.forEach((issue) => {
     const card = document.createElement("div");
+
     card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow">
+          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="./assets/Open-Status.png" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
@@ -90,6 +91,7 @@ const showAllIssueCard = (issues) => {
           </div>
     
     `;
+
     cardsContainer.appendChild(card);
   });
 };
@@ -108,12 +110,12 @@ const showOpenCard = (issues) => {
   openArr.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow">
+          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="./assets/Open-Status.png" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
@@ -158,12 +160,12 @@ const showClosedCard = (issues) => {
   closedArr.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow">
+          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="./assets/Open-Status.png" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
