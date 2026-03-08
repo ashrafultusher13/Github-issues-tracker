@@ -10,6 +10,7 @@ const loadIssueCard = () => {
     .then((object) => {
       issueArr = object.data;
       showAllIssueCard(issueArr);
+      issuesCount("all");
     });
 };
 
@@ -21,18 +22,28 @@ const btnActive = (id) => {
   if (id === "open-btn") {
     openBtn.classList.add("btn-primary");
     showOpenCard(issueArr);
+    issuesCount("open");
   } else if (id === "closed-btn") {
     closedBtn.classList.add("btn-primary");
     showClosedCard(issueArr);
+    issuesCount("closed");
   } else {
     allBtn.classList.add("btn-primary");
     showAllIssueCard(issueArr);
+    issuesCount("all");
   }
 };
 
-const issuesCount = () => {
-  const openArrCount = filterIssues("open");
-  console.log(openArrCount.length);
+const issuesCount = (type) => {
+  const issueCountElement = document.getElementById("issue-count");
+
+  if (type == "open") {
+    issueCountElement.innerText = filterIssues("open").length;
+  } else if (type == "closed") {
+    issueCountElement.innerText = filterIssues("closed").length;
+  } else {
+    issueCountElement.innerText = issueArr.length;
+  }
 };
 
 const showAllIssueCard = (issues) => {
@@ -189,8 +200,6 @@ const showClosedCard = (issues) => {
 };
 
 loadIssueCard();
-
-issuesCount();
 
 // {
 // "id": 1,
