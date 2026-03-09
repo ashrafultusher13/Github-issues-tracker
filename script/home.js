@@ -3,6 +3,7 @@ const openBtn = document.getElementById("open-btn");
 const closedBtn = document.getElementById("closed-btn");
 const issueNum = document.getElementById("issue-count").innerText;
 let issueArr = [];
+let searchedIssue = [];
 
 const loadIssueCard = () => {
   loadingSpinner(true);
@@ -74,26 +75,6 @@ const showDetails = (issue) => {
   document.getElementById("issue-modal").showModal();
 };
 
-// const btnActive = (id) => {
-//   loadingSpinner(true);
-//   allBtn.classList.remove("btn-primary");
-//   openBtn.classList.remove("btn-primary");
-//   closedBtn.classList.remove("btn-primary");
-
-//   if (id === "open-btn") {
-//     openBtn.classList.add("btn-primary");
-//     showOpenCard(issueArr);
-//     issuesCount("open");
-//   } else if (id === "closed-btn") {
-//     closedBtn.classList.add("btn-primary");
-//     showClosedCard(issueArr);
-//     issuesCount("closed");
-//   } else {
-//     allBtn.classList.add("btn-primary");
-//     showAllIssueCard(issueArr);
-//     issuesCount("all");
-//   }
-// };
 const btnActive = (id) => {
   loadingSpinner(true);
 
@@ -125,8 +106,12 @@ const issuesCount = (type) => {
     issueCountElement.innerText = filterIssues("open").length;
   } else if (type == "closed") {
     issueCountElement.innerText = filterIssues("closed").length;
+  } else if (type == "searched") {
+    issueCountElement.innerText = searchedIssue.length;
   } else {
-    issueCountElement.innerText = issueArr.length;
+    issueCountElement.innerText = searchedIssue.length
+      ? searchedIssue.length
+      : issueArr.length;
   }
 };
 
@@ -184,10 +169,12 @@ const showAllIssueCard = (issues) => {
     });
   });
   loadingSpinner(false);
+  searchFunc();
 };
 
 const filterIssues = (status) => {
-  return issueArr.filter((issue) => issue.status === status);
+  const source = searchedIssue.length ? searchedIssue : issueArr;
+  return source.filter((issue) => issue.status === status);
 };
 
 const showOpenCard = (issues) => {
@@ -292,3 +279,20 @@ const showClosedCard = (issues) => {
 };
 
 loadIssueCard();
+
+const searchFunc = () => {
+  document.getElementById("search-btn").addEventListener("click", () => {
+    const input = document.getElementById("search-input");
+    const inputVal = input.value.trim().toLowerCase();
+
+    fetch(
+      `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${inputVal}`,
+    )
+      .then((res) => res.json())
+      .then((matchIssue) => {
+        searchedIssue = matchIssue.data;
+        showAllIssueCard(searchedIssue);
+        issuesCount("searched");
+      });
+  });
+};
