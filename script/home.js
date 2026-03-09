@@ -68,7 +68,7 @@ const showDetails = (issue) => {
           </div>
           <div class="flex flex-col justify-center items-center">
             <p class="text-gray-400">Priority:</p>
-            <p class="bg-purple-300 py-1 px-5 rounded-2xl text-purple-700">${issue.priority.toUpperCase()}</p>
+            <p class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-purple-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-purple-500"}">${issue.priority.toUpperCase()}</p>
           </div>
         </div>
   `;
@@ -129,7 +129,7 @@ const showAllIssueCard = (issues) => {
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-gray-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-gray-500"}">${issue.priority.toUpperCase()}</span>
+                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-purple-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-purple-500"}">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
@@ -190,7 +190,7 @@ const showOpenCard = (issues) => {
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-gray-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-gray-500"}">${issue.priority.toUpperCase()}</span>
+                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-purple-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-purple-500"}">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
@@ -239,7 +239,7 @@ const showClosedCard = (issues) => {
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-gray-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-gray-500"}">${issue.priority.toUpperCase()}</span>
+                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-purple-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-purple-500"}">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
