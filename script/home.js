@@ -169,7 +169,6 @@ const showAllIssueCard = (issues) => {
     });
   });
   loadingSpinner(false);
-  searchFunc();
 };
 
 const filterIssues = (status) => {
@@ -296,3 +295,5 @@ const searchFunc = () => {
       });
   });
 };
+
+searchFunc();
