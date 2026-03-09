@@ -39,9 +39,9 @@ const showDetails = (issue) => {
   <h3 class="text-lg font-bold">${issue.title}</h3>
         <div class="flex gap-7 items-center">
           <p
-            class="${issue.status === "open" ? "bg-green-600" : "bg-purple-600"} rounded-full p-2 text-white font-medium text-[12px]"
+            class="${issue.status === "open" ? "bg-green-600" : "bg-purple-600"} rounded-full px-3 py-1 text-white font-medium text-[12px]"
           >
-            ${issue.status}
+            ${issue.status.toUpperCase()}
           </p>
 
           <ul class="flex gap-7 list-disc text-sm text-gray-400">
@@ -60,7 +60,7 @@ const showDetails = (issue) => {
         </p>
 
         <div
-          class="bg-gray-200 flex justify-between items-center p-4 rounded-md"
+          class="bg-gray-100 flex justify-between items-center p-4 rounded-md"
         >
           <div>
             <p class="text-gray-400">Assignee:</p>
@@ -129,17 +129,16 @@ const showAllIssueCard = (issues) => {
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                
-                <span class="bg-purple-200 p-1 rounded text-purple-500">${issue.priority.toUpperCase()}</span>
+                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-gray-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-gray-500"}">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
               <p class="text-gray-400">${issue.description}</p>
               <!-- card labels -->
-              <div class="flex gap-2">
-                <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+              <div class="flex gap-2">    
+                <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
                 <span class="bg-yellow-200 text-yellow-600 rounded"
-                  >${issue.labels[1] ? issue.labels[1] : ""}</span
+                  >${issue.labels[1] ? issue.labels[1] : " "}</span
                 >
               </div>
             </div>
@@ -150,7 +149,7 @@ const showAllIssueCard = (issues) => {
                 <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400 text-sm">Assignee:${issue.assignee}</p>
               </div>
               <div class="down-right flex flex-col items-start">
                 <p class="text-gray-400 text-sm">${issue.createdAt}</p>
@@ -191,17 +190,16 @@ const showOpenCard = (issues) => {
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                
-                <span class="bg-purple-200 p-1 rounded text-purple-500">${issue.priority.toUpperCase()}</span>
+                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-gray-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-gray-500"}">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
               <p class="text-gray-400">${issue.description}</p>
               <!-- card labels -->
-              <div class="flex gap-2">
-                <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+              <div class="flex gap-2">    
+                <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
                 <span class="bg-yellow-200 text-yellow-600 rounded"
-                  >${issue.labels[1] ? issue.labels[1] : ""}</span
+                  >${issue.labels[1] ? issue.labels[1] : " "}</span
                 >
               </div>
             </div>
@@ -212,7 +210,7 @@ const showOpenCard = (issues) => {
                 <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400 text-sm">Assignee:${issue.assignee}</p>
               </div>
               <div class="down-right flex flex-col items-start">
                 <p class="text-gray-400 text-sm">${issue.createdAt}</p>
@@ -241,17 +239,16 @@ const showClosedCard = (issues) => {
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                
-                <span class="bg-purple-200 p-1 rounded text-purple-500">${issue.priority.toUpperCase()}</span>
+                <span class="${issue.priority === "high" ? "bg-red-200" : issue.priority === "medium" ? "bg-yellow-200" : "bg-gray-200"} py-1 px-5 rounded-2xl ${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-600" : "text-gray-500"}">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
               <p class="text-gray-400">${issue.description}</p>
               <!-- card labels -->
-              <div class="flex gap-2">
-                <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+              <div class="flex gap-2">    
+                <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
                 <span class="bg-yellow-200 text-yellow-600 rounded"
-                  >${issue.labels[1] ? issue.labels[1] : ""}</span
+                  >${issue.labels[1] ? issue.labels[1] : " "}</span
                 >
               </div>
             </div>
@@ -262,7 +259,7 @@ const showClosedCard = (issues) => {
                 <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400 text-sm">Assignee:${issue.assignee}</p>
               </div>
               <div class="down-right flex flex-col items-start">
                 <p class="text-gray-400 text-sm">${issue.createdAt}</p>
