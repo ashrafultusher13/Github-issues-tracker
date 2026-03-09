@@ -51,8 +51,10 @@ const showDetails = (issue) => {
         </div>
 
         <div class="flex gap-2">
-          <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
-          <span class="bg-yellow-200 text-yellow-600 rounded">${issue.labels[1] ? issue.labels[1] : ""}</span>
+         <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
+                <span class="${issue.labels[1] === "enhancement" ? "bg-green-200" : "bg-yellow-200"} ${issue.labels[1] === "enhancement" ? "text-green-500" : "text-yellow-600"} rounded"
+                  >${issue.labels[1] ? issue.labels[1] : " "}</span
+                >
         </div>
 
         <p class="text-gray-400">
@@ -137,7 +139,7 @@ const showAllIssueCard = (issues) => {
               <!-- card labels -->
               <div class="flex gap-2">    
                 <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
-                <span class="bg-yellow-200 text-yellow-600 rounded"
+                <span class="${issue.labels[1] === "enhancement" ? "bg-green-200" : "bg-yellow-200"} ${issue.labels[1] === "enhancement" ? "text-green-500" : "text-yellow-600"} rounded"
                   >${issue.labels[1] ? issue.labels[1] : " "}</span
                 >
               </div>
@@ -198,7 +200,7 @@ const showOpenCard = (issues) => {
               <!-- card labels -->
               <div class="flex gap-2">    
                 <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
-                <span class="bg-yellow-200 text-yellow-600 rounded"
+                <span class="${issue.labels[1] === "enhancement" ? "bg-green-200" : "bg-yellow-200"} ${issue.labels[1] === "enhancement" ? "text-green-500" : "text-yellow-600"} rounded"
                   >${issue.labels[1] ? issue.labels[1] : " "}</span
                 >
               </div>
@@ -221,6 +223,11 @@ const showOpenCard = (issues) => {
     
     `;
     cardsContainer.appendChild(card);
+
+    card.addEventListener("click", () => {
+      const cardId = issue.id;
+      loadIssueDetails(cardId);
+    });
   });
   loadingSpinner(false);
 };
@@ -247,7 +254,7 @@ const showClosedCard = (issues) => {
               <!-- card labels -->
               <div class="flex gap-2">    
                 <span class="${issue.labels[0] === "enhancement" ? "bg-green-200" : "bg-red-200"} ${issue.labels[0] === "enhancement" ? "text-green-500" : "text-red-500"} rounded">${issue.labels[0]}</span>
-                <span class="bg-yellow-200 text-yellow-600 rounded"
+                <span class="${issue.labels[1] === "enhancement" ? "bg-green-200" : "bg-yellow-200"} ${issue.labels[1] === "enhancement" ? "text-green-500" : "text-yellow-600"} rounded"
                   >${issue.labels[1] ? issue.labels[1] : " "}</span
                 >
               </div>
@@ -270,6 +277,11 @@ const showClosedCard = (issues) => {
     
     `;
     cardsContainer.appendChild(card);
+
+    card.addEventListener("click", () => {
+      const cardId = issue.id;
+      loadIssueDetails(cardId);
+    });
   });
   loadingSpinner(false);
 };
