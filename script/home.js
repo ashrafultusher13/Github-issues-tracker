@@ -41,11 +41,11 @@ const showDetails = (issue) => {
           <p
             class="${issue.status === "open" ? "bg-green-600" : "bg-purple-600"} rounded-full px-3 py-1 text-white font-medium text-[12px]"
           >
-            ${issue.status.toUpperCase()}
+            ${issue.status === "open" ? "Opened" : "Closed"}
           </p>
 
           <ul class="flex gap-7 list-disc text-sm text-gray-400">
-            <li>Opened by Fahim Ahmed</li>
+            <li>${issue.status === "open" ? "Opened" : "Closed"} by ${issue.author}</li>
             <li>${issue.createdAt}</li>
           </ul>
         </div>
