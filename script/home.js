@@ -44,18 +44,18 @@ const showDetails = (issue) => {
             ${issue.status}
           </p>
 
-          <ul class="flex gap-7 list-disc text-sm">
+          <ul class="flex gap-7 list-disc text-sm text-gray-400">
             <li>Opened by Fahim Ahmed</li>
             <li>${issue.createdAt}</li>
           </ul>
         </div>
 
         <div class="flex gap-2">
-          <span class="bg-yellow-400">${issue.labels[0]}</span>
-          <span class="bg-yellow-400">${issue.labels[1] ? issue.labels[1] : ""}</span>
+          <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+          <span class="bg-yellow-200 text-yellow-600 rounded">${issue.labels[1] ? issue.labels[1] : ""}</span>
         </div>
 
-        <p>
+        <p class="text-gray-400">
           ${issue.description}
         </p>
 
@@ -63,12 +63,12 @@ const showDetails = (issue) => {
           class="bg-gray-200 flex justify-between items-center p-4 rounded-md"
         >
           <div>
-            <p>Assignee:</p>
-            <p>${issue.assignee}</p>
+            <p class="text-gray-400">Assignee:</p>
+            <p class="font-semibold">${issue.assignee}</p>
           </div>
-          <div>
-            <p>Priority:</p>
-            <p>${issue.priority}</p>
+          <div class="flex flex-col justify-center items-center">
+            <p class="text-gray-400">Priority:</p>
+            <p class="bg-purple-300 py-1 px-5 rounded-2xl text-purple-700">${issue.priority.toUpperCase()}</p>
           </div>
         </div>
   `;
@@ -123,22 +123,22 @@ const showAllIssueCard = (issues) => {
     const card = document.createElement("div");
 
     card.innerHTML = `
-          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
+          <div class="bg-base-100 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                <p>${issue.status}</p>
-                <span>${issue.priority}</span>
+                
+                <span class="bg-purple-200 p-1 rounded text-purple-500">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
               <p class="text-gray-400">${issue.description}</p>
               <!-- card labels -->
               <div class="flex gap-2">
-                <span class="bg-yellow-400">${issue.labels[0]}</span>
-                <span class="bg-yellow-400"
+                <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+                <span class="bg-yellow-200 text-yellow-600 rounded"
                   >${issue.labels[1] ? issue.labels[1] : ""}</span
                 >
               </div>
@@ -186,22 +186,22 @@ const showOpenCard = (issues) => {
   openArr.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
+          <div class="bg-base-100 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                <p>${issue.status}</p>
-                <span>${issue.priority}</span>
+                
+                <span class="bg-purple-200 p-1 rounded text-purple-500">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
               <p class="text-gray-400">${issue.description}</p>
               <!-- card labels -->
               <div class="flex gap-2">
-                <span class="bg-yellow-400">${issue.labels[0]}</span>
-                <span class="bg-yellow-400"
+                <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+                <span class="bg-yellow-200 text-yellow-600 rounded"
                   >${issue.labels[1] ? issue.labels[1] : ""}</span
                 >
               </div>
@@ -236,22 +236,22 @@ const showClosedCard = (issues) => {
   closedArr.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
+          <div class="bg-base-100 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
                 <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
-                <p>${issue.status}</p>
-                <span>${issue.priority}</span>
+                
+                <span class="bg-purple-200 p-1 rounded text-purple-500">${issue.priority.toUpperCase()}</span>
               </div>
               <!-- card details no div -->
               <h2 class="font-semibold text-xl">${issue.title}</h2>
               <p class="text-gray-400">${issue.description}</p>
               <!-- card labels -->
               <div class="flex gap-2">
-                <span class="bg-yellow-400">${issue.labels[0]}</span>
-                <span class="bg-yellow-400"
+                <span class="bg-red-200 text-red-500 rounded">${issue.labels[0]}</span>
+                <span class="bg-yellow-200 text-yellow-600 rounded"
                   >${issue.labels[1] ? issue.labels[1] : ""}</span
                 >
               </div>
