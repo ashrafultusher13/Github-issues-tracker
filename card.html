@@ -1,10 +1,10 @@
 card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
+          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
@@ -21,16 +21,16 @@ card.innerHTML = `
             </div>
             <hr class="text-gray-400" />
             <!-- Card down -->
-            <div class="p-4 flex justify-between">
+            <div class="p-4 flex justify-between gap-4">
               <div class="down-left">
-                <p class="text-gray-400">
+                <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
               </div>
-              <div class="down-right flex flex-col items-end">
-                <p class="text-gray-400">${issue.createdAt}</p>
-                <p class="text-gray-400">Updated:${issue.updatedAt}</p>
+              <div class="down-right flex flex-col items-start">
+                <p class="text-gray-400 text-sm">${issue.createdAt}</p>
+                <p class="text-gray-400 text-sm">Updated:${issue.updatedAt}</p>
               </div>
             </div>
           </div>

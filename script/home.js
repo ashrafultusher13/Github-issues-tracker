@@ -5,6 +5,7 @@ const issueNum = document.getElementById("issue-count").innerText;
 let issueArr = [];
 
 const loadIssueCard = () => {
+  loadingSpinner(true);
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res) => res.json())
     .then((object) => {
@@ -21,7 +22,15 @@ const loadIssueDetails = (id) => {
     .then((object) => showDetails(object.data));
 };
 
-
+const loadingSpinner = (status) => {
+  if (status === true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("main-container").classList.add("hidden");
+  } else if (status === false) {
+    document.getElementById("spinner").classList.add("hidden");
+    document.getElementById("main-container").classList.remove("hidden");
+  }
+};
 
 const showDetails = (issue) => {
   const detailsBox = document.getElementById("details-container");
@@ -65,24 +74,48 @@ const showDetails = (issue) => {
   document.getElementById("issue-modal").showModal();
 };
 
-const btnActive = (id) => {
-  allBtn.classList.remove("btn-primary");
-  openBtn.classList.remove("btn-primary");
-  closedBtn.classList.remove("btn-primary");
+// const btnActive = (id) => {
+//   loadingSpinner(true);
+//   allBtn.classList.remove("btn-primary");
+//   openBtn.classList.remove("btn-primary");
+//   closedBtn.classList.remove("btn-primary");
 
-  if (id === "open-btn") {
-    openBtn.classList.add("btn-primary");
-    showOpenCard(issueArr);
-    issuesCount("open");
-  } else if (id === "closed-btn") {
-    closedBtn.classList.add("btn-primary");
-    showClosedCard(issueArr);
-    issuesCount("closed");
-  } else {
-    allBtn.classList.add("btn-primary");
-    showAllIssueCard(issueArr);
-    issuesCount("all");
-  }
+//   if (id === "open-btn") {
+//     openBtn.classList.add("btn-primary");
+//     showOpenCard(issueArr);
+//     issuesCount("open");
+//   } else if (id === "closed-btn") {
+//     closedBtn.classList.add("btn-primary");
+//     showClosedCard(issueArr);
+//     issuesCount("closed");
+//   } else {
+//     allBtn.classList.add("btn-primary");
+//     showAllIssueCard(issueArr);
+//     issuesCount("all");
+//   }
+// };
+const btnActive = (id) => {
+  loadingSpinner(true);
+
+  setTimeout(() => {
+    allBtn.classList.remove("btn-primary");
+    openBtn.classList.remove("btn-primary");
+    closedBtn.classList.remove("btn-primary");
+
+    if (id === "open-btn") {
+      openBtn.classList.add("btn-primary");
+      showOpenCard(issueArr);
+      issuesCount("open");
+    } else if (id === "closed-btn") {
+      closedBtn.classList.add("btn-primary");
+      showClosedCard(issueArr);
+      issuesCount("closed");
+    } else {
+      allBtn.classList.add("btn-primary");
+      showAllIssueCard(issueArr);
+      issuesCount("all");
+    }
+  }, 0);
 };
 
 const issuesCount = (type) => {
@@ -105,7 +138,7 @@ const showAllIssueCard = (issues) => {
     const card = document.createElement("div");
 
     card.innerHTML = `
-          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
+          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
@@ -144,11 +177,13 @@ const showAllIssueCard = (issues) => {
     `;
 
     cardsContainer.appendChild(card);
+
     card.addEventListener("click", () => {
       const cardId = issue.id;
       loadIssueDetails(cardId);
     });
   });
+  loadingSpinner(false);
 };
 
 const filterIssues = (status) => {
@@ -159,18 +194,17 @@ const showOpenCard = (issues) => {
   const cardsContainer = document.getElementById("cards-container");
   cardsContainer.innerHTML = "";
 
-  // const openArr = issues.filter((issue) => issue.status === "open");
   const openArr = filterIssues("open");
 
   openArr.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
+          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
@@ -187,16 +221,16 @@ const showOpenCard = (issues) => {
             </div>
             <hr class="text-gray-400" />
             <!-- Card down -->
-            <div class="p-4 flex justify-between">
+            <div class="p-4 flex justify-between gap-4">
               <div class="down-left">
-                <p class="text-gray-400">
+                <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
               </div>
-              <div class="down-right flex flex-col items-end">
-                <p class="text-gray-400">${issue.createdAt}</p>
-                <p class="text-gray-400">Updated:${issue.updatedAt}</p>
+              <div class="down-right flex flex-col items-start">
+                <p class="text-gray-400 text-sm">${issue.createdAt}</p>
+                <p class="text-gray-400 text-sm">Updated:${issue.updatedAt}</p>
               </div>
             </div>
           </div>
@@ -204,23 +238,23 @@ const showOpenCard = (issues) => {
     `;
     cardsContainer.appendChild(card);
   });
+  loadingSpinner(false);
 };
 const showClosedCard = (issues) => {
   const cardsContainer = document.getElementById("cards-container");
   cardsContainer.innerHTML = "";
 
-  // const closedArr = issues.filter((issue) => issue.status === "closed");
   const closedArr = filterIssues("closed");
 
   closedArr.forEach((issue) => {
     const card = document.createElement("div");
     card.innerHTML = `
-          <div class="bg-orange-200 rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"}">
+          <div class="bg-orange-200 h-full rounded-lg shadow ${issue.status === "open" ? "border-t-5 border-green-600" : "border-t-5 border-purple-600"} cursor-pointer">
             <!-- Card up -->
             <div class="p-4 space-y-2">
               <!-- card header -->
               <div class="flex justify-between items-center">
-                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed- Status .png"}" alt="" />
+                <img class="w-[30px]" src="${issue.status === "open" ? "./assets/Open-Status.png" : "./assets/Closed-Status.png"}" alt="" />
                 <p>${issue.status}</p>
                 <span>${issue.priority}</span>
               </div>
@@ -237,16 +271,16 @@ const showClosedCard = (issues) => {
             </div>
             <hr class="text-gray-400" />
             <!-- Card down -->
-            <div class="p-4 flex justify-between">
+            <div class="p-4 flex justify-between gap-4">
               <div class="down-left">
-                <p class="text-gray-400">
+                <p class="text-gray-400 text-sm">
                 #<span>${issue.id}</span> by ${issue.author}
               </p>
-              <p class="text-gray-400">Assignee:${issue.assignee}</p>
+              <p class="text-gray-400" text-sm">Assignee:${issue.assignee}</p>
               </div>
-              <div class="down-right flex flex-col items-end">
-                <p class="text-gray-400">${issue.createdAt}</p>
-                <p class="text-gray-400">Updated:${issue.updatedAt}</p>
+              <div class="down-right flex flex-col items-start">
+                <p class="text-gray-400 text-sm">${issue.createdAt}</p>
+                <p class="text-gray-400 text-sm">Updated:${issue.updatedAt}</p>
               </div>
             </div>
           </div>
@@ -254,9 +288,7 @@ const showClosedCard = (issues) => {
     `;
     cardsContainer.appendChild(card);
   });
+  loadingSpinner(false);
 };
 
 loadIssueCard();
-
-
-
